@@ -6,7 +6,6 @@ import 'package:rickmorty/layers/data/source/network/api.dart';
 import 'package:rickmorty/layers/domain/usecase/get_all_characters.dart';
 import 'package:rickmorty/layers/presentation/theme.dart';
 import 'package:rickmorty/layers/presentation/using_bloc/app_using_bloc.dart';
-import 'package:rickmorty/layers/presentation/using_cubit/app_using_cubit.dart';
 import 'package:rickmorty/main.dart';
 
 class AppRoot extends StatefulWidget {
@@ -108,8 +107,6 @@ class _AppRootState extends State<AppRoot> {
     switch (stateManagement) {
       case (StateManagementOptions.bloc):
         return AppUsingBloc(getAllCharacters: _getAllCharacters);
-      case (StateManagementOptions.cubit):
-        return AppUsingCubit(getAllCharacters: _getAllCharacters);
       default:
         return Container();
     }
