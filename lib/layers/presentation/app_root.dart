@@ -7,7 +7,6 @@ import 'package:rickmorty/layers/domain/usecase/get_all_characters.dart';
 import 'package:rickmorty/layers/presentation/theme.dart';
 import 'package:rickmorty/layers/presentation/using_bloc/app_using_bloc.dart';
 import 'package:rickmorty/layers/presentation/using_cubit/app_using_cubit.dart';
-import 'package:rickmorty/layers/presentation/using_get_it/app_using_get_it.dart';
 import 'package:rickmorty/layers/presentation/using_mobx/app_using_mobx.dart';
 import 'package:rickmorty/layers/presentation/using_provider/app_using_provider.dart';
 import 'package:rickmorty/layers/presentation/using_riverpod/app_using_riverpod.dart';
@@ -116,8 +115,6 @@ class _AppRootState extends State<AppRoot> {
         return AppUsingCubit(getAllCharacters: _getAllCharacters);
       case (StateManagementOptions.mobX):
         return AppUsingMobX(getAllCharacters: _getAllCharacters);
-      case (StateManagementOptions.getIt):
-        return const AppUsingGetIt();
       case (StateManagementOptions.provider):
         return AppUsingProvider(getAllCharacters: _getAllCharacters);
       case (StateManagementOptions.riverpod):

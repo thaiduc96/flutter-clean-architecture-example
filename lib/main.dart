@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:rickmorty/layers/presentation/app_root.dart';
-import 'package:rickmorty/layers/presentation/using_get_it/injector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum StateManagementOptions {
@@ -18,7 +17,6 @@ late SharedPreferences sharedPref;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPref = await SharedPreferences.getInstance();
-  initializeGetIt();
   Animate.restartOnHotReload = true;
 
   runApp(const AppRoot());
