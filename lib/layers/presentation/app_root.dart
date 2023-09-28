@@ -16,14 +16,14 @@ class AppRoot extends StatefulWidget {
 }
 
 class _AppRootState extends State<AppRoot> {
-  late StateManagementOptions _currentOption;
+  // late StateManagementOptions _currentOption;
   late GetAllCharacters _getAllCharacters;
   var themeMode = ThemeMode.dark;
 
   @override
   void initState() {
     super.initState();
-    _currentOption = StateManagementOptions.bloc;
+    // _currentOption = StateManagementOptions.bloc;
 
     // Notice:
     //
@@ -60,7 +60,7 @@ class _AppRootState extends State<AppRoot> {
               title: Transform.translate(
                 offset: const Offset(10, 0),
                 child: Text(
-                  'Rick & Morty\n(${getTitleToOption(_currentOption)})',
+                  'Rick & Morty\n()',
                   style: tt.headlineLarge!.copyWith(
                     color: cs.onSurfaceVariant,
                     fontWeight: FontWeight.bold,
@@ -75,81 +75,15 @@ class _AppRootState extends State<AppRoot> {
                   },
                   icon: const Icon(Icons.light_mode),
                 ),
-                PopupMenuButton<StateManagementOptions>(
-                  onSelected: (value) => setState(() {
-                    _currentOption = value;
-                  }),
-                  itemBuilder: (context) => [
-                    _menuEntry(StateManagementOptions.bloc, 'Bloc'),
-                    _menuEntry(StateManagementOptions.cubit, 'Cubit'),
-                    _menuEntry(StateManagementOptions.mobX, 'MobX'),
-                    _menuEntry(StateManagementOptions.getIt, 'GetIT'),
-                    _menuEntry(StateManagementOptions.provider, 'Provider'),
-                    _menuEntry(StateManagementOptions.riverpod, 'Riverpod'),
-                  ],
-                ),
               ],
             ),
-            body: _getAppUsing(stateManagement: _currentOption)
+            body: AppUsingBloc(getAllCharacters: _getAllCharacters)
                 .animate()
                 .fadeIn(delay: 1.2.seconds, duration: .7.seconds),
           );
         },
       ),
     );
-  }
-
-  // ---------------------------------------------------------------------------
-  // _Helpers
-  // ---------------------------------------------------------------------------
-
-  Widget _getAppUsing({required StateManagementOptions stateManagement}) {
-    switch (stateManagement) {
-      case (StateManagementOptions.bloc):
-        return AppUsingBloc(getAllCharacters: _getAllCharacters);
-      default:
-        return Container();
-    }
-  }
-
-  PopupMenuItem<StateManagementOptions> _menuEntry(
-    StateManagementOptions option,
-    String text,
-  ) {
-    final isSelected = _currentOption == option;
-    final textTheme = Theme.of(context)
-        .textTheme
-        .apply(displayColor: Theme.of(context).colorScheme.onSurface);
-
-    return PopupMenuItem<StateManagementOptions>(
-      value: option,
-      child: Text(
-        isSelected ? 'using $text' : 'use $text',
-        style: textTheme.bodyMedium!.copyWith(
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-          color: isSelected ? Colors.red : Colors.black,
-        ),
-      ),
-    );
-  }
-
-  String getTitleToOption(StateManagementOptions option) {
-    switch (option) {
-      case (StateManagementOptions.bloc):
-        return 'BLOC';
-      case (StateManagementOptions.cubit):
-        return 'Cubit';
-      case (StateManagementOptions.mobX):
-        return 'MobX';
-      case (StateManagementOptions.getIt):
-        return 'GetIT';
-      case (StateManagementOptions.provider):
-        return 'Provider';
-      case (StateManagementOptions.riverpod):
-        return 'RiverPode';
-      default:
-        return '';
-    }
   }
 
   bool get useLightMode {
